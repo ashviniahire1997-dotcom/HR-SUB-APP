@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Hub - Centralized SOP Management</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons for a modern icon set -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Google Fonts for a clean, modern look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+        .nav-link.active {
+            background-color: #e0f2fe;
+            color: #0c4a6e;
+            font-weight: 500;
+        }
+        .content-section {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800">
+
+    <div class="flex h-screen">
+        <aside class="w-64 bg-white border-r border-slate-200 flex flex-col">
+            <div class="p-4 border-b border-slate-200 flex items-center gap-3">
+                <div class="bg-blue-600 p-2 rounded-lg">
+                    <i data-lucide="building-2" class="text-white"></i>
+                </div>
+                <h1 class="text-xl font-bold text-slate-800">HR Hub</h1>
+            </div>
+            <nav class="flex-grow p-2">
+                <ul class="space-y-1">
+                    <li><a href="#" class="nav-link flex items-center gap-3 px-3 py-2 rounded-md text-slate-600 hover:bg-slate-200 transition-colors duration-200 active" data-target="dashboard"><i data-lucide="layout-dashboard"></i>Dashboard</a></li>
+                    <li><a href="#" class="nav-link flex items-center gap-3 px-3 py-2 rounded-md text-slate-600 hover:bg-slate-200 transition-colors duration-200" data-target="recruitment"><i data-lucide="users"></i>Recruitment</a></li>
+                    <li><a href="#" class="nav-link flex items-center gap-3 px-3 py-2 rounded-md text-slate-600 hover:bg-slate-200 transition-colors duration-200" data-target="onboarding"><i data-lucide="user-plus"></i>Onboarding</a></li>
+                    <li><a href="#" class="nav-link flex items-center gap-3 px-3 py-2 rounded-md text-slate-600 hover:bg-slate-200 transition-colors duration-200" data-target="payroll"><i data-lucide="banknote"></i>Payroll & Comp</a></li>
+                    <li><a href="#" class="nav-link flex items-center gap-3 px-3 py-2 rounded-md text-slate-600 hover:bg-slate-200 transition-colors duration-200" data-target="pms"><i data-lucide="trending-up"></i>Performance</a></li>
+                    <li><a href="#" class="nav-link flex items-center gap-3 px-3 py-2 rounded-md text-slate-600 hover:bg-slate-200 transition-colors duration-200" data-target="transfers"><i data-lucide="repeat"></i>Lifecycle & Transfers</a></li>
+                    <li><a href="#" class="nav-link flex items-center gap-3 px-3 py-2 rounded-md text-slate-600 hover:bg-slate-200 transition-colors duration-200" data-target="leave"><i data-lucide="calendar-off"></i>Leave & Attendance</a></li>
+                    <li><a href="#" class="nav-link flex items-center gap-3 px-3 py-2 rounded-md text-slate-600 hover:bg-slate-200 transition-colors duration-200" data-target="relations"><i data-lucide="heart-handshake"></i>Employee Relations</a></li>
+                    <li><a href="#" class="nav-link flex items-center gap-3 px-3 py-2 rounded-md text-slate-600 hover:bg-slate-200 transition-colors duration-200" data-target="offboarding"><i data-lucide="user-minus"></i>Offboarding</a></li>
+                </ul>
+            </nav>
+            <div class="p-4 border-t border-slate-200">
+                <div class="flex items-center gap-3">
+                    <img src="https://placehold.co/40x40/E0F2FE/0C4A6E?text=HR" alt="User Avatar" class="rounded-full">
+                    <div>
+                        <p class="font-semibold text-sm">HR Officer</p>
+                        <p class="text-xs text-slate-500">[Your Name]</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="flex-1 flex flex-col">
+            <header class="bg-white border-b border-slate-200 p-4 flex justify-between items-center">
+                <div class="relative w-full max-w-md">
+                    <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input type="text" id="searchInput" placeholder="Search for any SOP or document..." class="w-full pl-10 pr-4 py-2 bg-slate-100 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="flex items-center gap-4 text-right">
+                    <div>
+                        <p id="dateDisplay" class="font-medium text-slate-700"></p>
+                        <p id="clockDisplay" class="text-sm text-slate-500"></p>
+                    </div>
+                    <button class="p-2 rounded-full hover:bg-slate-200 transition-colors">
+                        <i data-lucide="bell"></i>
+                    </button>
+                </div>
+            </header>
+            
+            <div class="flex-1 p-6 overflow-y-auto">
+                <section id="dashboard" class="content-section">
+                    <h2 class="text-3xl font-bold mb-6">Dashboard</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="bg-sky-100 text-sky-700 p-3 rounded-lg"><i data-lucide="zap"></i></div>
+                                <h3 class="text-xl font-semibold">Quick Actions</h3>
+                            </div>
+                            <ul class="space-y-2">
+                                <li class="flex items-center gap-2 text-blue-600 hover:underline cursor-pointer"><i data-lucide="user-plus" class="w-4 h-4"></i>Initiate New Hire</li>
+                                <li class="flex items-center gap-2 text-blue-600 hover:underline cursor-pointer"><i data-lucide="file-plus-2" class="w-4 h-4"></i>Post a Job Opening</li>
+                                <li class="flex items-center gap-2 text-blue-600 hover:underline cursor-pointer"><i data-lucide="form-input" class="w-4 h-4"></i>Submit a Claim</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="bg-amber-100 text-amber-700 p-3 rounded-lg"><i data-lucide="clock-3"></i></div>
+                                <h3 class="text-xl font-semibold">Pending Tasks</h3>
+                            </div>
+                             <p class="text-slate-600">You have <span class="font-bold text-red-600">3</span> pending background verifications.</p>
+                             <p class="text-slate-600">There are <span class="font-bold text-red-600">2</span> performance reviews awaiting approval.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                           <div class="flex items-center gap-4 mb-4">
+                                <div class="bg-emerald-100 text-emerald-700 p-3 rounded-lg"><i data-lucide="megaphone"></i></div>
+                                <h3 class="text-xl font-semibold">Latest Updates</h3>
+                            </div>
+                             <p class="text-slate-600">New Holiday Calendar for 2026 has been published.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            const navLinks = document.querySelectorAll('.nav-link');
+            const contentSections = document.querySelectorAll('.content-section');
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('data-target');
+                    navLinks.forEach(navLink => navLink.classList.remove('active'));
+                    link.classList.add('active');
+                    contentSections.forEach(section => {
+                        if (section.id === targetId) {
+                            section.classList.remove('hidden');
+                        } else {
+                            section.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const documentCards = document.querySelectorAll('.document-card');
+                documentCards.forEach(card => {
+                    const cardText = card.textContent.toLowerCase();
+                    if (cardText.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+            const clockElement = document.getElementById('clockDisplay');
+            const dateElement = document.getElementById('dateDisplay');
+            function updateClock() {
+                const now = new Date();
+                const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+                clockElement.textContent = now.toLocaleTimeString('en-IN', timeOptions);
+                const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                dateElement.textContent = now.toLocaleDateString('en-IN', dateOptions);
+            }
+            updateClock();
+            setInterval(updateClock, 1000);
+        });
+    </script>
+</body>
+</html>
